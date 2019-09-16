@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InTouch", "InTouch\InTouch.csproj", "{57B89B3B-1518-46A1-9808-31AC4922839B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectDb", "ProjectDb\ProjectDb.csproj", "{68000E53-DBB9-41FC-8401-4007F2D28EF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57B89B3B-1518-46A1-9808-31AC4922839B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57B89B3B-1518-46A1-9808-31AC4922839B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57B89B3B-1518-46A1-9808-31AC4922839B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57B89B3B-1518-46A1-9808-31AC4922839B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68000E53-DBB9-41FC-8401-4007F2D28EF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68000E53-DBB9-41FC-8401-4007F2D28EF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68000E53-DBB9-41FC-8401-4007F2D28EF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68000E53-DBB9-41FC-8401-4007F2D28EF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49921742-1490-47DE-9613-1A7E624B0A96}
+	EndGlobalSection
+EndGlobal
