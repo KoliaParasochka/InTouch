@@ -42,7 +42,7 @@ namespace InTouch.Controllers
 
 
         /// <summary>
-        /// This action sends message to server
+        /// This action sfends message to server
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
