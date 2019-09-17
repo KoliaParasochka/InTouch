@@ -8,11 +8,21 @@
     <div class="messages">
         @foreach (var el in ViewBag.Messages)
         {
-            <div class="col-md-11">
-                <p>
-                    @el.Text
-                </p>
-            </div>
+            if (string.IsNullOrEmpty(el.ImgPath))
+            {
+                <div class="col-md-11">
+                    <p>
+                        @el.Text
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-11">
+                    <img class="img-size" src="@Url.Content(el.ImgPath)" />
+                </div>
+            }
+
             if (ViewBag.Time < el.TimeToDelete)
             {
                 <div class="col-md-1">
@@ -25,6 +35,12 @@
             }
         }
     </div>
+    @using (Html.BeginForm("Upload", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="upload" /><br>
+        <input type="submit" value="Загрузить" class="btn btn-default" />
+    }
+    <br />
     @using (Html.BeginForm("SendMessage", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
@@ -41,5 +57,6 @@
             </div>
         </div>
     }
+
 </div>
 

@@ -2,6 +2,7 @@
 using ProjectDb.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -26,7 +27,6 @@ namespace InTouch.Controllers
         public ActionResult Index()
         {
             Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
-            int id = person.Messages.ToList().Last().Id;
             if (person != null)
             {
                 ViewBag.Time = DateTime.Now;
@@ -40,6 +40,7 @@ namespace InTouch.Controllers
 
         }
 
+
         /// <summary>
         /// This action sends message to server
         /// </summary>
@@ -51,6 +52,7 @@ namespace InTouch.Controllers
         {
             if (ModelState.IsValid)
             {
+                message.ImgPath = string.Empty;
                 Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
                 message.TimeToDelete = DateTime.Now.AddMinutes(15);
                 person.Messages.Add(message);
@@ -70,7 +72,40 @@ namespace InTouch.Controllers
         [HttpPost]
         public ActionResult DeleteMessage(int id)
         {
+            Message message = repository.Messages.Get(id);
+            // Checking the path of file
+            if (!string.IsNullOrEmpty(message.ImgPath))
+            {   // If path is not empty program removes file
+                FileInfo file = new FileInfo(Server.MapPath(message.ImgPath));
+                file.Delete();
+            }
             repository.Messages.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+
+        /// <summary>
+        /// Upload file
+        /// </summary>
+        /// <param name="upload"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase upload)
+        {
+            if (upload != null)
+            {
+                // Getting the name of file
+                string fileName = System.IO.Path.GetFileName(upload.FileName);
+                // Getting the full path
+                string path = Server.MapPath("~/Files/" + fileName);
+                
+                // Saving file
+                upload.SaveAs(path);
+                Message message = new Message { Text = string.Empty, ImgPath = "~/Files/" + fileName, TimeToDelete = DateTime.Now.AddMinutes(15) };
+                Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
+                person.Messages.Add(message);
+                repository.People.Update(person);
+            }
             return RedirectToAction("Index");
         }
 

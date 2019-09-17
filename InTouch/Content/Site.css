@@ -118,6 +118,11 @@ footer {
     border-radius: 5px;
 }
 
+.img-size {
+    width: 20%;
+    height: 20%;
+}
+
 .head-pos {
     text-align: center;
     font-weight: 400;
