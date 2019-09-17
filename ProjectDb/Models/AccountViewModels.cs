@@ -65,6 +65,18 @@ namespace ProjectDb.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Фамилия")]
+        [RegularExpression(@"[A-Za-zА-Яа-я]+", ErrorMessage = "Фамилия должна содержать либо латинские буквы, либо кирилицу")]
+        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 2)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Имя")]
+        [RegularExpression(@"[A-Za-zА-Яа-я]+", ErrorMessage = "Имя должно содержать либо латинские буквы, либо кирилицу")]
+        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 3)]
+        public string Name { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Адрес электронной почты")]
         public string Email { get; set; }
@@ -83,6 +95,8 @@ namespace ProjectDb.Models
 
     public class ResetPasswordViewModel
     {
+        
+
         [Required]
         [EmailAddress]
         [Display(Name = "Адрес электронной почты")]

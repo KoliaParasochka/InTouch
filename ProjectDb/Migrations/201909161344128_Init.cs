@@ -7,28 +7,28 @@ namespace ProjectDb.Migrations
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.Messages",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Text = c.Int(nullable: false),
-                        PersonId = c.Int(),
-                        SecondPersonId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.People", t => t.PersonId)
-                .Index(t => t.PersonId);
+            //CreateTable(
+            //    "dbo.Messages",
+            //    c => new
+            //        {
+            //            Id = c.Int(nullable: false, identity: true),
+            //            Text = c.Int(nullable: false),
+            //            PersonId = c.Int(),
+            //            SecondPersonId = c.Int(nullable: false),
+            //        })
+            //    .PrimaryKey(t => t.Id)
+            //    .ForeignKey("dbo.People", t => t.PersonId)
+            //    .Index(t => t.PersonId);
             
-            CreateTable(
-                "dbo.People",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        LastName = c.Int(nullable: false),
-                        Name = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
+            //CreateTable(
+            //    "dbo.People",
+            //    c => new
+            //        {
+            //            Id = c.Int(nullable: false, identity: true),
+            //            LastName = c.Int(nullable: false),
+            //            Name = c.Int(nullable: false),
+            //        })
+            //    .PrimaryKey(t => t.Id);
             
         }
         

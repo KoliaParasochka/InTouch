@@ -9,7 +9,7 @@ namespace ProjectDb.Entities
     public class Message
     {
         public int Id { get; set; }
-        public int Text { get; set; }
+        public string Text { get; set; }
 
         public int? PersonId { get; set; }
         public Person Person { get; set; }

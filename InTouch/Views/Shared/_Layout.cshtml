@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("ГАВНАЯ", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("ГАВНАЯ", "Index", "Home")</li>*@
                     @*<li><a href="@Url.Action("Index","Home")#contacts" class="main-hrefs">КОНТАКТЫ</a></li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -32,7 +32,7 @@
         @RenderBody()
     </div>
     <footer>
-        <p class="footer-txt">&copy; @DateTime.Now.Year – все права защищены <span class="foot-logo">Fashion Shop</span></p>
+        <p class="footer-txt">&copy; @DateTime.Now.Year – все права защищены <span class="foot-logo">InTouch</span></p>
     </footer>
 
 

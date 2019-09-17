@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -17,8 +15,25 @@ namespace InTouch
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Подключите здесь службу электронной почты для отправки сообщения электронной почты.
-            return Task.FromResult(0);
+            // настройка логина, пароля отправителя
+            var from = "pepsikolia99@gmail.com";
+            var pass = "Zakashmar_99";
+
+            // адрес и порт smtp-сервера, с которого мы и будем отправлять письмо
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential(from, pass);
+            client.EnableSsl = true;
+
+            // создаем письмо: message.Destination - адрес получателя
+            var mail = new MailMessage(from, message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+            mail.IsBodyHtml = true;
+
+            return client.SendMailAsync(mail);
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -6,7 +7,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ProjectDb.Entities;
 using ProjectDb.Models;
+using ProjectDb.Repositories;
 
 namespace InTouch.Controllers
 {
@@ -15,9 +18,11 @@ namespace InTouch.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        EFUnitOfWork repository;
 
         public ManageController()
         {
+            repository = new EFUnitOfWork("DefaultConnection");
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -72,6 +77,9 @@ namespace InTouch.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
+           
+
             return View(model);
         }
 
