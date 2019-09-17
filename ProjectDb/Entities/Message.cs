@@ -10,6 +10,7 @@ namespace ProjectDb.Entities
     {
         public int Id { get; set; }
         public string Text { get; set; }
+        public DateTime TimeToDelete { get; set; }
 
         public int? PersonId { get; set; }
         public Person Person { get; set; }

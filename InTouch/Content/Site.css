@@ -106,6 +106,17 @@ footer {
 
 /** Index (main page) **/
 
+.messages {
+    width: 100%;
+    float: left;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    min-height: 400px;
+    background-color: white;
+    border: 1px solid silver;
+    border-radius: 5px;
+}
 
 .head-pos {
     text-align: center;
