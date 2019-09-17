@@ -29,8 +29,9 @@ namespace InTouch.Controllers
             Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
             if (person != null)
             {
+                ViewBag.Person = person;
                 ViewBag.Time = DateTime.Now;
-                ViewBag.Messages = person.Messages;
+                ViewBag.Messages = person.Messages.OrderByDescending(p => p.Id);
                 return View();
             }
             else

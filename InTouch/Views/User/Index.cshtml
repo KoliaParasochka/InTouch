@@ -5,6 +5,34 @@
 }
 
 <div class="container">
+    <h3>@ViewBag.Person.Name @ViewBag.Person.LastName</h3>
+    <hr class="line"/>
+    <div class="col-md-8">
+        @using (Html.BeginForm("SendMessage", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @placeholder = "Введите ваше сообщение..." })
+                    @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-0 col-md-10">
+                    <input type="submit" class="btn btn-primary" value="Отправить" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-4">
+        @using (Html.BeginForm("Upload", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="file" name="upload" /><br>
+            <input type="submit" value="Загрузить" class="btn btn-default" />
+        }
+    </div>
+    
     <div class="messages">
         @foreach (var el in ViewBag.Messages)
         {
@@ -33,30 +61,10 @@
                     }
                 </div>
             }
+            <br />
         }
     </div>
-    @using (Html.BeginForm("Upload", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <input type="file" name="upload" /><br>
-        <input type="submit" value="Загрузить" class="btn btn-default" />
-    }
-    <br />
-    @using (Html.BeginForm("SendMessage", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div class="col-md-12">
-                @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @placeholder = "Введите ваше сообщение..." })
-                @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-0 col-md-10">
-                <input type="submit" class="btn btn-primary" value="Отправить" />
-            </div>
-        </div>
-    }
+
 
 </div>
 

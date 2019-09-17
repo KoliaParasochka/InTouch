@@ -3,7 +3,28 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container">
-    
+<div id="carousel" class="carousel slide">
+    <ol class="carousel-indicators">
+        <li class="active" data-target="#carousel" data-slide="0"></li>
+        <li data-target="#carousel" data-slide="1"></li>
+        <li data-target="#carousel" data-slide="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/Content/Images/Backgrounds/server.jpg" />
+        </div>
+        <div class="item">
+            <img src="~/Content/Images/Backgrounds/computer.jpg" />
+        </div>
+        <div class="item">
+            <img src="~/Content/Images/Backgrounds/messaging.jpg" />
+        </div>
+    </div>
+    <a href="#carousel" class="left carousel-control" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a href="#carousel" class="right carousel-control" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
 </div>
 
