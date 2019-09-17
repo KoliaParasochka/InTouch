@@ -70,7 +70,8 @@ namespace InTouch.Controllers
             {
                 return View(model);
             }
-
+            var user = await UserManager.FindAsync(model.Email, model.Password);
+            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             // Сбои при входе не приводят к блокированию учетной записи
             // Чтобы ошибки при вводе пароля инициировали блокирование учетной записи, замените на shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);

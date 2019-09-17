@@ -1,24 +1,154 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿/** Main styles **/
+* {
+    margin: 0;
+    padding: 0;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+html,
+body {
+    float: left;
+    width: 100%;
+    height: 91%;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+body {
+    margin-top: 50px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+/** Layout **/
+.wrapper {
+    width: 100%;
+    min-height: 100%;
+    float: left;
+    background-color: #f2f2f2;
+}
+
+footer {
+    padding-top: 30px;
+    float: left;
+    width: 100%;
+    height: 80px;
+    background-color: #1d1e22;
+}
+
+.bg-col {
+    background-color: #1d1e22;
+}
+
+.navbar-nav li a,
+.navbar-brand a {
+    color: white;
+    transition: all.3s ease;
+}
+
+    .navbar-nav li a:hover,
+    .navbar-nav li a:active {
+        background-color: #1d1e22;
+        color: #6689FF;
+    }
+
+.main-hrefs:active {
+    background-color: #1d1e22;
+    color: #dfc017;
+}
+
+.menu {
+    border: 1px solid #30303c;
+    background-color: #25252D;
+    padding: 3px 8px 3px 8px;
+}
+
+    .menu img {
+        width: 25px;
+        height: 25px;
+    }
+
+.logo {
+    font-size: 1.8em;
+    float: left;
+    color: #6689FF;
+    font-style: italic;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 600;
+}
+
+    .logo:hover {
+        color: #6689FF;
+    }
+
+.foot-logo {
+    font-style: italic;
+    color: white;
+}
+
+    .foot-logo:first-letter {
+        rotation: 20deg;
+        color: #dfc017;
+    }
+
+.footer-txt {
+    text-align: center;
+    color: white;
+}
+
+.col-xs-12 {
+    margin-bottom: 10px;
+}
+
+.col-xs-10 {
+    margin-bottom: 10px;
+}
+
+.clear {
+    float: left;
+    clear: both;
+}
+
+/** Index (main page) **/
+
+
+.head-pos {
+    text-align: center;
+    font-weight: 400;
+    color: #25252D;
+}
+
+.text {
+    text-indent: 1.5em;
+    font-size: 1.2em;
+}
+
+.contact-box {
+    border-color: #808080;
+}
+
+.back {
+    background-color: silver;
+}
+
+
+/** Adaptility **/
+@media(min-width: 1900px) and (max-width: 2700px) {
+    
+}
+
+@media(min-width: 1150px) and (max-width: 1599px) {
+    
+}
+
+@media(min-width: 996px) and (max-width: 1149px) {
+    
+}
+
+@media(min-width: 700px) and (max-width: 995px) {
+    
+}
+
+@media(min-width: 700px) and (max-width: 1149px) {
+   
+}
+
+@media(max-width: 699px) {
+    
+    
 }

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ProjectDb.Entities;
 
 namespace ProjectDb.EF
 {
@@ -20,8 +21,15 @@ namespace ProjectDb.EF
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Person> People { get; set; }
+        public DbSet<Message> Messages { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
+        {
+        }
+
+        public ApplicationDbContext(string connectionString):base(connectionString, throwIfV1Schema: false)
         {
         }
 

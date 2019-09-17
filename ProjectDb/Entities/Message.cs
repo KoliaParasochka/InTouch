@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjectDb.Entities
+{
+    public class Message
+    {
+        public int Id { get; set; }
+        public int Text { get; set; }
+
+        public int? PersonId { get; set; }
+        public Person Person { get; set; }
+
+        public int SecondPersonId { get; set; }
+    }
+}
