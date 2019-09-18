@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace InTouch.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         /// <summary>

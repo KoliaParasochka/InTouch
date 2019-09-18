@@ -58,11 +58,11 @@ namespace InTouch
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "995406751888-elk5an86rsh289car9i4ld2pk0nk8f7o.apps.googleusercontent.com",
+                ClientSecret = "RTb6oYui_UbMH-3nUXT7YIx8"
+            });
         }
     }
 }

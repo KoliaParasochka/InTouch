@@ -376,7 +376,7 @@ namespace InTouch.Controllers
             {
                 return RedirectToAction("Index", "Manage");
             }
-
+           
             if (ModelState.IsValid)
             {
                 // Получение сведений о пользователе от внешнего поставщика входа
@@ -385,7 +385,9 @@ namespace InTouch.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EmailConfirmed = true };
+                Person person = new Person { Name = model.Name, LastName = model.LastName, Email = model.Email };
+                repository.People.Create(person);
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
