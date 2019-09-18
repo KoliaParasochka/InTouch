@@ -224,6 +224,7 @@
     <Content Include="Content\Images\Backgrounds\computer.jpg" />
     <Content Include="Content\Images\Backgrounds\messaging.jpg" />
     <Content Include="Content\Images\Backgrounds\server.jpg" />
+    <Content Include="Content\Images\Icons\menu.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -268,6 +269,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\vue.js" />
+    <Content Include="Scripts\vue.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -314,7 +317,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\Icons\" />
     <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>

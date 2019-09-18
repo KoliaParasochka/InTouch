@@ -104,6 +104,10 @@ footer {
     clear: both;
 }
 
+.error {
+    color: #e61a1a;
+}
+
 /** Index (main page) **/
 
 .carousel-caption {
@@ -124,7 +128,6 @@ footer {
     background-color: white;
     border: 1px solid silver;
     border-radius: 5px;
-    /*overflow: auto;*/
 }
 
 .btn-danger {

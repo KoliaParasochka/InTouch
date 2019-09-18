@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container">
+<div class="container" id="vue">
     <h3>@ViewBag.Person.Name @ViewBag.Person.LastName</h3>
     <hr class="line"/>
     <div class="col-md-8">
@@ -14,13 +14,15 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 <div class="col-md-12">
-                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control", @placeholder = "Введите ваше сообщение..." })
-                    @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
+                    <textarea placeholder = "Введите ваше сообщение..." class = "form-control" id="Text" name="Text" v-model="message"></textarea>
+                    @*@Html.TextAreaFor(m => m.Text, new { @v-model="message", @class = "form-control", @placeholder = "Введите ваше сообщение..." })
+                    @*Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })*@
+                    <span :class="{'text-danger': IsError}">{{error}}</span>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-offset-0 col-md-10">
-                    <input type="submit" class="btn btn-primary" value="Отправить" />
+                    <input :disabled="IsError" type="submit" class="btn btn-primary" value="Отправить" />
                 </div>
             </div>
         }
@@ -34,6 +36,9 @@
     </div>
     
     <div class="messages">
+        <div class="col-md-11">
+            <p>{{message}}</p>
+        </div>
         @foreach (var el in ViewBag.Messages)
         {
             if (string.IsNullOrEmpty(el.ImgPath))
@@ -68,3 +73,30 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#vue',
+        data: {
+            message: '', 
+            error: '',
+            IsError: false
+        },
+        watch: {
+            message: function () {
+                if (this.message.length > 300) {
+                    this.error = 'Количество символов больше 300!';
+                    this.IsError = true;
+     
+                }
+                if (this.message.length < 30) {
+                    this.error = '';
+                    this.IsError = false;
+                }
+            }
+        }
+
+    });
+
+</script>
