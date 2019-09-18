@@ -130,8 +130,6 @@ namespace InTouch.Controllers
                 Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
                 person.Messages.Add(message);
                 repository.People.Update(person);
-                int x = 1;
-                
             }
         }
 
