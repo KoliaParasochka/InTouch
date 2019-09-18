@@ -53,7 +53,7 @@ namespace InTouch.Controllers
         {
             if (ModelState.IsValid)
             {
-                message.ImgPath = string.Empty;
+                message.Path = string.Empty;
                 Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
                 message.TimeToDelete = DateTime.Now.AddMinutes(15);
                 person.Messages.Add(message);
@@ -75,9 +75,9 @@ namespace InTouch.Controllers
         {
             Message message = repository.Messages.Get(id);
             // Checking the path of file
-            if (!string.IsNullOrEmpty(message.ImgPath))
+            if (!string.IsNullOrEmpty(message.Path))
             {   // If path is not empty program removes file
-                FileInfo file = new FileInfo(Server.MapPath(message.ImgPath));
+                FileInfo file = new FileInfo(Server.MapPath(message.Path));
                 file.Delete();
             }
             repository.Messages.Delete(id);
@@ -97,17 +97,41 @@ namespace InTouch.Controllers
             {
                 // Getting the name of file
                 string fileName = System.IO.Path.GetFileName(upload.FileName);
+                string path = string.Empty;
+                string ext = Path.GetExtension(fileName);
+                Message message;
                 // Getting the full path
-                string path = Server.MapPath("~/Files/" + fileName);
-                
+                if (ext.Equals(".jpg") || ext.Equals(".jpeg") || ext.Equals(".png"))
+                {
+                    path = Server.MapPath("~/Pictures/" + fileName);
+                    message = new Message { Text = string.Empty, Path = "~/Pictures/" + fileName, TimeToDelete = DateTime.Now.AddMinutes(15), IsImg = true };
+
+                }
+                else
+                {
+                    path = Server.MapPath("~/Files/" + fileName);
+                    message = new Message { Text = string.Empty, Path = "~/Files/" + fileName, TimeToDelete = DateTime.Now.AddMinutes(15), IsImg = false, FileName = fileName };
+
+                }
                 // Saving file
                 upload.SaveAs(path);
-                Message message = new Message { Text = string.Empty, ImgPath = "~/Files/" + fileName, TimeToDelete = DateTime.Now.AddMinutes(15) };
-                Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
+                     Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
                 person.Messages.Add(message);
                 repository.People.Update(person);
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult DownloadFile(string filePath)
+        {
+            string fileName = System.IO.Path.GetFileName(filePath);
+            string ext = Path.GetExtension(fileName);
+            
+            string path = Server.MapPath(filePath);
+            string type = "application/docx" + ext;
+            string name = fileName;
+            return File(path, type, name);
         }
 
     }

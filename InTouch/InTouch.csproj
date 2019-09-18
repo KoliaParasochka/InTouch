@@ -224,6 +224,7 @@
     <Content Include="Content\Images\Backgrounds\computer.jpg" />
     <Content Include="Content\Images\Backgrounds\messaging.jpg" />
     <Content Include="Content\Images\Backgrounds\server.jpg" />
+    <Content Include="Content\Images\Icons\Document.png" />
     <Content Include="Content\Images\Icons\menu.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -318,6 +319,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
+    <Folder Include="Pictures\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

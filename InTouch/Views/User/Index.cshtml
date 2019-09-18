@@ -41,7 +41,7 @@
         </div>
         @foreach (var el in ViewBag.Messages)
         {
-            if (string.IsNullOrEmpty(el.ImgPath))
+            if (string.IsNullOrEmpty(el.Path))
             {
                 <div class="col-md-11">
                     <p>
@@ -51,9 +51,24 @@
             }
             else
             {
-                <div class="col-md-11">
-                    <img class="img-size" src="@Url.Content(el.ImgPath)" />
-                </div>
+                if (el.IsImg)
+                {
+                    <div class="col-md-11">
+                        <img class="img-size" src="@Url.Content(el.Path)" />
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-11">
+                        @using(Html.BeginForm("DownloadFile", "User", FormMethod.Get))
+                        {
+                            <input type="hidden" name="filePath" value="@el.Path" />
+                            <button class="btn-download clear"><img src="~/Content/Images/Icons/Document.png" class="img-size"/></button>
+                            <span class="left clear"><b>@el.FileName</b></span>
+                        }
+                    </div>
+                }
+
             }
 
             if (ViewBag.Time < el.TimeToDelete)
@@ -72,6 +87,11 @@
 
 
 </div>
+
+@helper checkFile(string path) { 
+    
+}
+
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 

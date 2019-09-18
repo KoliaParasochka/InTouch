@@ -108,8 +108,16 @@ footer {
     color: #e61a1a;
 }
 
-/** Index (main page) **/
+.btn-download{
+    min-height: 10px;
+    min-width: 10px;
+    border: none;
+    background-color: white;
+}
 
+.left { float: left;}
+
+/** Index (main page) **/
 .carousel-caption {
     top: 40%;
     color: beige;

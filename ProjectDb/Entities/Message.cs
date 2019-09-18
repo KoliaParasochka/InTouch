@@ -10,7 +10,9 @@ namespace ProjectDb.Entities
     {
         public int Id { get; set; }
         public string Text { get; set; }
-        public string ImgPath { get; set; }
+        public string Path { get; set; }
+        public string FileName { get; set; }
+        public bool IsImg { get; set; }
         public DateTime TimeToDelete { get; set; }
 
         public int? PersonId { get; set; }

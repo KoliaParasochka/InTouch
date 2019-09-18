@@ -109,6 +109,10 @@
     <Compile Include="Migrations\201909171004427_DataMigration1.Designer.cs">
       <DependentUpon>201909171004427_DataMigration1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909181305576_DataMigration2.cs" />
+    <Compile Include="Migrations\201909181305576_DataMigration2.Designer.cs">
+      <DependentUpon>201909181305576_DataMigration2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -136,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909171004427_DataMigration1.resx">
       <DependentUpon>201909171004427_DataMigration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909181305576_DataMigration2.resx">
+      <DependentUpon>201909181305576_DataMigration2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
