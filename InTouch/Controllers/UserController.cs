@@ -152,7 +152,7 @@ namespace InTouch.Controllers
 
 
         /// <summary>
-        /// Using to store sticker for user.
+        /// Using to store sticker for user./
         /// </summary>
         /// <param name="path"></param>
         public void SaveSticker(string path)
