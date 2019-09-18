@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -28,7 +29,7 @@ namespace InTouch.Controllers
         }
 
         /// <summary>
-        /// This is the which works with main user page
+        /// This is the which works with main user page.
         /// </summary>
         /// <returns></returns>
         // GET: User
@@ -50,24 +51,29 @@ namespace InTouch.Controllers
 
         }
 
-
         /// <summary>
-        /// This action sfends message to server
+        /// This action sfends message to server.
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SendMessage(Message message)
+        public ActionResult SendMessage(Message message, HttpPostedFileBase upload, string path)
         {
-            if (ModelState.IsValid)
+            if (upload != null)
+            {
+                Upload(upload);
+            }
+            if(path != null)
+            {
+                SaveSticker(path);
+            }
+            if (!string.IsNullOrEmpty(message.Text))
             {
                 message.Path = string.Empty;
                 Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
                 message.TimeToDelete = DateTime.Now.AddMinutes(15);
                 person.Messages.Add(message);
                 repository.People.Update(person);
-                
             }
             
             return RedirectToAction("Index");
@@ -95,12 +101,11 @@ namespace InTouch.Controllers
 
 
         /// <summary>
-        /// Upload file
+        /// Upload file (pictures, documents, audio, video) 
         /// </summary>
         /// <param name="upload"></param>
         /// <returns></returns>
-        [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase upload)
+        public void Upload(HttpPostedFileBase upload)
         {
             if (upload != null)
             {
@@ -114,35 +119,32 @@ namespace InTouch.Controllers
                 {
                     path = Server.MapPath("~/Pictures/" + fileName);
                     message = new Message { Text = string.Empty, Path = "~/Pictures/" + fileName, TimeToDelete = DateTime.Now.AddMinutes(15), IsImg = true };
-
                 }
                 else
                 {
                     path = Server.MapPath("~/Files/" + fileName);
                     message = new Message { Text = string.Empty, Path = "~/Files/" + fileName, TimeToDelete = DateTime.Now.AddMinutes(15), IsImg = false, FileName = fileName };
-
                 }
                 // Saving file
                 upload.SaveAs(path);
                 Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
                 person.Messages.Add(message);
                 repository.People.Update(person);
+                int x = 1;
+                
             }
-            return RedirectToAction("Index");
         }
 
         /// <summary>
-        /// 
+        /// Using to download file from site.
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-
         [HttpGet]
         public ActionResult DownloadFile(string filePath)
         {
             string fileName = System.IO.Path.GetFileName(filePath);
             string ext = Path.GetExtension(fileName); // Getting extantion.
-            
             string path = Server.MapPath(filePath); // Getting a full path.
             string type = "application/docx" + ext;
             return File(path, type, fileName);
@@ -150,19 +152,16 @@ namespace InTouch.Controllers
 
 
         /// <summary>
-        /// 
+        /// Using to store sticker for user.
         /// </summary>
         /// <param name="path"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public ActionResult SaveSticker(string path)
-        {
+        public void SaveSticker(string path)
+        { 
             Message message = stickers.Where(el => el.Path == path).FirstOrDefault();
             message.TimeToDelete = DateTime.Now.AddMinutes(15);
             Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
             person.Messages.Add(message);
             repository.People.Update(person);
-            return RedirectToAction("Index");
         }
 
     }

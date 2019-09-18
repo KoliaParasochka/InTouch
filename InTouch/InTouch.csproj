@@ -224,6 +224,7 @@
     <Content Include="Content\Images\Backgrounds\computer.jpg" />
     <Content Include="Content\Images\Backgrounds\messaging.jpg" />
     <Content Include="Content\Images\Backgrounds\server.jpg" />
+    <Content Include="Content\Images\Icons\close.png" />
     <Content Include="Content\Images\Icons\Document.png" />
     <Content Include="Content\Images\Icons\menu.png" />
     <Content Include="Content\Images\Stickers\respect.jpg" />

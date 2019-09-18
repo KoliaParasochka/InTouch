@@ -11,6 +11,10 @@ namespace InTouch.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Returns the main page of application.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
