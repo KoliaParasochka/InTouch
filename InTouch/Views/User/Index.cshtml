@@ -7,54 +7,47 @@
 <div class="container" id="vue">
     <h3>@ViewBag.Person.Name @ViewBag.Person.LastName</h3>
     <hr class="line"/>
-    <div class="row">
-    <div class="col-md-8">
-        @using (Html.BeginForm("SendMessage", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    <div class="">
+        @using (Html.BeginForm("SendMessage", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
         {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <div class="col-md-12">
-                    <textarea placeholder = "Введите ваше сообщение..." class = "form-control" id="Text" name="Text" v-model="message"></textarea>
-                    @*@Html.TextAreaFor(m => m.Text, new { @v-model="message", @class = "form-control", @placeholder = "Введите ваше сообщение..." })
-                    @*Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })*@
-                    <span :class="{'text-danger': IsError}">{{error}}</span>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <textarea placeholder="Введите ваше сообщение..." class="form-control" id="Text" name="Text" v-model="message"></textarea>
+                            <span :class="{'text-danger': IsError}">{{error}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <input :disabled="IsError" type="submit" class="btn btn-primary" value="Отправить" />
+                    </div>
+                    <div class="col-md-10">
+                        <div class="col-md-2">
+                            <div v-on:click="showStickers" class="btn btn-success">Стикеры</div>
+                        </div>
+                        <div class="col-md-10" v-show="stickers">
+                            
+                                @foreach (var sticker in ViewBag.Stickers)
+                                {
+                                    <label class="border-l">
+                                        <input type="checkbox" name="path" class="left" value="@sticker.Path" />
+                                        <img src="@Url.Content(sticker.Path)" class="small-img" />
+                                    </label>
+                                }
+                                <div v-on:click="closeStickers" class="close-btn close">x</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-offset-0 col-md-10">
-                    <input :disabled="IsError" type="submit" class="btn btn-primary" value="Отправить" />
-                </div>
+            <div class="col-md-4">
+                 <input type="file" name="upload" /><br>
             </div>
         }
-    </div>
-    <div class="col-md-4">
-        @using (Html.BeginForm("Upload", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <input type="file" name="upload" /><br>
-            <input type="submit" value="Загрузить" class="btn btn-default" />
-        }
-    </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <button v-on:click="showStickers" class="btn btn-success">Стикеры</button>
-        </div>
-        <div class="col-md-10" v-show="stickers">
-            @using (Html.BeginForm("SaveSticker", "User", FormMethod.Post))
-            {
-                <input type="submit" value="Отправить" class="btn btn-info"/>
-                foreach (var sticker in ViewBag.Stickers)
-                {
-                    <label class="border-l">
-                        <input type="checkbox" name="path" class="left" value="@sticker.Path" />
-                        <img src="@Url.Content(sticker.Path)" class="small-img" />
-                    </label>
-                }
 
-            }
-        </div>
     </div>
+   
     
     <div class="messages">
         <div class="col-md-11">
@@ -137,6 +130,9 @@
         methods: {
             showStickers: function () {
                 this.stickers = 1;
+            },
+            closeStickers: function () {
+                this.stickers = 0;
             }
         }
 

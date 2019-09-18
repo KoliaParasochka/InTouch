@@ -128,7 +128,16 @@ footer {
     height: 30px;
 }
 
-.left { float: left;}
+
+.close-btn {
+    float: left;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.left {
+    float: left;
+}
 
 /** Index (main page) **/
 .carousel-caption {
