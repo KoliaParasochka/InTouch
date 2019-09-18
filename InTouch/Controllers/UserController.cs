@@ -28,7 +28,7 @@ namespace InTouch.Controllers
         }
 
         /// <summary>
-        /// This is the which works with main user page
+        /// This is the which works with main user page.
         /// </summary>
         /// <returns></returns>
         // GET: User
