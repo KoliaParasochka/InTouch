@@ -14,9 +14,17 @@ namespace InTouch.Controllers
     {
         EFUnitOfWork repository;
         private int idMessage { get; set; }
+
+        List<Message> stickers;
+
         public UserController()
         {
             repository = new EFUnitOfWork("DefaultConnection");
+            stickers = new List<Message>();
+            stickers.Add(new Message { Text = "sticker", Path = "~/Content/Images/Stickers/anrgy.png", IsImg = true, TimeToDelete = DateTime.Now });
+            stickers.Add(new Message { Text = "sticker", Path = "~/Content/Images/Stickers/cool.jpg", IsImg = true, TimeToDelete = DateTime.Now });
+            stickers.Add(new Message { Text = "sticker", Path = "~/Content/Images/Stickers/greenSmile.jpg", IsImg = true, TimeToDelete = DateTime.Now });
+            stickers.Add(new Message { Text = "sticker", Path = "~/Content/Images/Stickers/respect.jpg", IsImg = true, TimeToDelete = DateTime.Now });
         }
 
         /// <summary>
@@ -32,6 +40,7 @@ namespace InTouch.Controllers
                 ViewBag.Person = person;
                 ViewBag.Time = DateTime.Now;
                 ViewBag.Messages = person.Messages.OrderByDescending(p => p.Id);
+                ViewBag.Stickers = stickers;
                 return View();
             }
             else
@@ -75,7 +84,7 @@ namespace InTouch.Controllers
         {
             Message message = repository.Messages.Get(id);
             // Checking the path of file
-            if (!string.IsNullOrEmpty(message.Path))
+            if (!string.IsNullOrEmpty(message.Path) && message.Text != "sticker")
             {   // If path is not empty program removes file
                 FileInfo file = new FileInfo(Server.MapPath(message.Path));
                 file.Delete();
@@ -115,23 +124,45 @@ namespace InTouch.Controllers
                 }
                 // Saving file
                 upload.SaveAs(path);
-                     Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
+                Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
                 person.Messages.Add(message);
                 repository.People.Update(person);
             }
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+
         [HttpGet]
         public ActionResult DownloadFile(string filePath)
         {
             string fileName = System.IO.Path.GetFileName(filePath);
-            string ext = Path.GetExtension(fileName);
+            string ext = Path.GetExtension(fileName); // Getting extantion.
             
-            string path = Server.MapPath(filePath);
+            string path = Server.MapPath(filePath); // Getting a full path.
             string type = "application/docx" + ext;
-            string name = fileName;
-            return File(path, type, name);
+            return File(path, type, fileName);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SaveSticker(string path)
+        {
+            Message message = stickers.Where(el => el.Path == path).FirstOrDefault();
+            message.TimeToDelete = DateTime.Now.AddMinutes(15);
+            Person person = repository.People.Find(p => p.Email == User.Identity.Name).FirstOrDefault();
+            person.Messages.Add(message);
+            repository.People.Update(person);
+            return RedirectToAction("Index");
         }
 
     }

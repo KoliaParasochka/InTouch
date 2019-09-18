@@ -7,6 +7,7 @@
 <div class="container" id="vue">
     <h3>@ViewBag.Person.Name @ViewBag.Person.LastName</h3>
     <hr class="line"/>
+    <div class="row">
     <div class="col-md-8">
         @using (Html.BeginForm("SendMessage", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
@@ -33,6 +34,26 @@
             <input type="file" name="upload" /><br>
             <input type="submit" value="Загрузить" class="btn btn-default" />
         }
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button v-on:click="showStickers" class="btn btn-success">Стикеры</button>
+        </div>
+        <div class="col-md-10" v-show="stickers">
+            @using (Html.BeginForm("SaveSticker", "User", FormMethod.Post))
+            {
+                <input type="submit" value="Отправить" class="btn btn-info"/>
+                foreach (var sticker in ViewBag.Stickers)
+                {
+                    <label class="border-l">
+                        <input type="checkbox" name="path" class="left" value="@sticker.Path" />
+                        <img src="@Url.Content(sticker.Path)" class="small-img" />
+                    </label>
+                }
+
+            }
+        </div>
     </div>
     
     <div class="messages">
@@ -88,10 +109,6 @@
 
 </div>
 
-@helper checkFile(string path) { 
-    
-}
-
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
@@ -101,7 +118,8 @@
         data: {
             message: '', 
             error: '',
-            IsError: false
+            IsError: false,
+            stickers: 0
         },
         watch: {
             message: function () {
@@ -110,10 +128,15 @@
                     this.IsError = true;
      
                 }
-                if (this.message.length < 30) {
+                if (this.message.length < 300) {
                     this.error = '';
                     this.IsError = false;
                 }
+            }
+        },
+        methods: {
+            showStickers: function () {
+                this.stickers = 1;
             }
         }
 

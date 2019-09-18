@@ -115,6 +115,19 @@ footer {
     background-color: white;
 }
 
+.border-l {
+    float: left;
+    box-sizing: border-box;
+    width: 10%;
+}
+
+.small-img {
+    float: left;
+    margin-bottom: 10px;
+    width: 30px;
+    height: 30px;
+}
+
 .left { float: left;}
 
 /** Index (main page) **/

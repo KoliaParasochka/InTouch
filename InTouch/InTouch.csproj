@@ -226,6 +226,10 @@
     <Content Include="Content\Images\Backgrounds\server.jpg" />
     <Content Include="Content\Images\Icons\Document.png" />
     <Content Include="Content\Images\Icons\menu.png" />
+    <Content Include="Content\Images\Stickers\respect.jpg" />
+    <Content Include="Content\Images\Stickers\greenSmile.jpg" />
+    <Content Include="Content\Images\Stickers\cool.jpg" />
+    <Content Include="Content\Images\Stickers\anrgy.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
