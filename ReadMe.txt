@@ -1,2 +1,2 @@
-c1996663@urhen.com
-Admin_1
+Почта: c1996663@urhen.com
+Пароль: Admin_1
