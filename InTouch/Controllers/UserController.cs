@@ -1,4 +1,5 @@
-﻿using ProjectDb.Entities;
+﻿using ProjectDb.EF;
+using ProjectDb.Entities;
 using ProjectDb.Repositories;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,17 @@ namespace InTouch.Controllers
             stickers.Add(new Message { Text = "sticker", Path = "~/Content/Images/Stickers/cool.jpg", IsImg = true, TimeToDelete = DateTime.Now });
             stickers.Add(new Message { Text = "sticker", Path = "~/Content/Images/Stickers/greenSmile.jpg", IsImg = true, TimeToDelete = DateTime.Now });
             stickers.Add(new Message { Text = "sticker", Path = "~/Content/Images/Stickers/respect.jpg", IsImg = true, TimeToDelete = DateTime.Now });
+        }
+
+        public UserController(EFUnitOfWork context)
+        {
+            repository = context;
+        }
+
+        public ActionResult TestGetAll()
+        {
+            var model = repository.People.Get(1);
+            return View(model);
         }
 
         /// <summary>

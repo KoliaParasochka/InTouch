@@ -18,6 +18,7 @@ namespace InTouch.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+            ViewBag.Message = "Some message";
             return View();
         }
     }
